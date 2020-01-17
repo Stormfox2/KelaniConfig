@@ -1,0 +1,1 @@
+[![Build Status](https://jenkins.kelanisystem.de/job/KelaniConfig/badge/icon)](https://jenkins.kelanisystem.de/job/KelaniConfig/)
