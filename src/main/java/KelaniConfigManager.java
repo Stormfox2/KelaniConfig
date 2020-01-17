@@ -9,17 +9,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class KelaniConfig {
+public class KelaniConfigManager {
         private Map<String, YamlFile> configs;
         private File configFolder = new File("data/");
 
-        public KelaniConfig(String... configs) {
+        public KelaniConfigManager(String... configs) {
             this.configs = new HashMap<>();
 
             createFile(configs);
         }
 
-        public KelaniConfig(File configFolder, String... configs){
+        public KelaniConfigManager(File configFolder, String... configs){
             this(configs);
             this.configFolder = configFolder;
         }
