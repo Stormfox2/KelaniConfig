@@ -1,4 +1,4 @@
-package main.java;
+package de.kelanisystem.kelaniconfig;
 
 import org.simpleyaml.configuration.file.YamlConfiguration;
 import org.simpleyaml.configuration.file.YamlFile;
