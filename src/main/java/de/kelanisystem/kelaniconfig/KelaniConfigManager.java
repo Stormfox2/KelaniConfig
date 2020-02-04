@@ -16,19 +16,44 @@ public class KelaniConfigManager {
     private Map<String, YamlFile> configs;
     private File configFolder = new File("data/");
 
+    /**
+     * Creates new instance of the KelaniConfigManager
+     * Default configfolder is data/
+     */
     public KelaniConfigManager() {
         this.configs = new HashMap<>();
     }
 
+    /**
+     * Creates new instance of the KelaniConfigManager
+     *
+     * @param configFolder default folder from configs
+     */
     public KelaniConfigManager(File configFolder) {
         this.configFolder = configFolder;
         configs = new HashMap<>();
     }
 
-    public List<YamlConfiguration> createFile(String... name) throws IOException, InvalidConfigurationException {
-        return createFile(configFolder, name);
+    /**
+     * Creates config(s) default path
+     *
+     * @param names of config(s) you want to create
+     * @return Configs you created
+     * @throws IOException                   On save
+     * @throws InvalidConfigurationException On load
+     */
+    public List<YamlConfiguration> createFile(String... names) throws IOException, InvalidConfigurationException {
+        return createFile(configFolder, names);
     }
 
+    /**
+     * Creates config(s) with different path
+     *
+     * @param names of config(s) you want to create
+     * @return Configs you created
+     * @throws IOException                   On save
+     * @throws InvalidConfigurationException On load
+     */
     public List<YamlConfiguration> createFile(File path, String... names) throws IOException, InvalidConfigurationException {
         List<YamlConfiguration> configurations = new ArrayList<>();
 
@@ -51,60 +76,150 @@ public class KelaniConfigManager {
         return configurations;
     }
 
-    public YamlConfiguration getConfig(String config) {
-        return configs.get(config);
+    /**
+     * Returns configfile by name
+     *
+     * @param configName name of the config
+     * @return YamlConfiguration file
+     */
+    public YamlConfiguration getConfig(String configName) {
+        return configs.get(configName);
     }
 
-    public void copyDefaults(String config, boolean bool) throws IOException {
-        this.configs.get(config).options().copyDefaults(bool);
+    /**
+     * Sets copy defaults option and saves
+     *
+     * @param configName name of the config you want to edit
+     * @param bool       param of the option
+     * @throws IOException on save
+     */
+    public void copyDefaults(String configName, boolean bool) throws IOException {
+        this.configs.get(configName).options().copyDefaults(bool);
 
-        save(config);
+        save(configName);
     }
 
-    public void addDefault(String config, String key, Object value) {
-        this.configs.get(config).addDefault(key, value);
+    /**
+     * Copies a default into config.
+     * Remember setting copy-defaults
+     *
+     * @param configName name of the config you want to edit
+     * @param key        key of default
+     * @param value      value of default
+     */
+    public void addDefault(String configName, String key, Object value) {
+        this.configs.get(configName).addDefault(key, value);
 
     }
 
-    public void addDefaults(String config, Map<String, Object> defaults) {
-            this.configs.get(config).addDefaults(defaults);
-        }
-
-        public Object get(String config, String key) {
-            return this.configs.get(config).get(key);
-        }
-
-        public String getString(String config, String key) {
-            return this.configs.get(config).getString(key);
-        }
-
-        public Boolean getBoolean(String config, String key) {
-            return this.configs.get(config).getBoolean(key);
-        }
-
-        public Integer getInteger(String config, String key) {
-            return this.configs.get(config).getInt(key);
-        }
-
-    public List<String> getStringList(String config, String key) {
-        return this.configs.get(config).getStringList(key);
+    /**
+     * Copies multiple defaults into config.
+     * Remember setting copy defaults
+     *
+     * @param configName name of the config you want to edit
+     * @param defaults   defaults you want to set
+     */
+    public void addDefaults(String configName, Map<String, Object> defaults) {
+        this.configs.get(configName).addDefaults(defaults);
     }
 
-    public List<Integer> getIntegerList(String config, String key) {
-        return this.configs.get(config).getIntegerList(key);
+    /**
+     * Gets an object out of config
+     *
+     * @param configName name of config you want to read
+     * @param key        key of the value you want to get
+     * @return value
+     */
+    public Object get(String configName, String key) {
+        return this.configs.get(configName).get(key);
     }
 
-    public List<?> getList(String config, String key) {
-        return this.configs.get(config).getList(key);
+    /**
+     * Gets an string out of config
+     *
+     * @param configName name of config you want to read
+     * @param key        key of the value you want to get
+     * @return value
+     */
+    public String getString(String configName, String key) {
+        return this.configs.get(configName).getString(key);
     }
 
-
-    public void setHeader(String config, String header) throws IOException {
-        this.configs.get(config).options().header(header);
-        save(config);
+    /**
+     * Gets an boolean out of config
+     *
+     * @param configName name of config you want to read
+     * @param key        key of the value you want to get
+     * @return value
+     */
+    public Boolean getBoolean(String configName, String key) {
+        return this.configs.get(configName).getBoolean(key);
     }
 
-    public void save(String config) throws IOException {
-        this.configs.get(config).save();
+    /**
+     * Gets an integer out of config
+     *
+     * @param configName name of config you want to read
+     * @param key        key of the value you want to get
+     * @return value
+     */
+    public Integer getInteger(String configName, String key) {
+        return this.configs.get(configName).getInt(key);
+    }
+
+    /**
+     * Gets an string list out of config
+     *
+     * @param configName name of config you want to read
+     * @param key        key of the value you want to get
+     * @return value
+     */
+    public List<String> getStringList(String configName, String key) {
+        return this.configs.get(configName).getStringList(key);
+    }
+
+    /**
+     * Gets an integer list out of config
+     *
+     * @param configName name of config you want to read
+     * @param key        key of the value you want to get
+     * @return value
+     */
+    public List<Integer> getIntegerList(String configName, String key) {
+        return this.configs.get(configName).getIntegerList(key);
+    }
+
+    /**
+     * Gets an list out of config
+     *
+     * @param configName name of config you want to read
+     * @param key        key of the value you want to get
+     * @return value
+     */
+    public List<?> getList(String configName, String key) {
+        return this.configs.get(configName).getList(key);
+    }
+
+    /**
+     * Set header rows of the config.
+     * For comments in the file
+     *
+     * @param configName name of the config
+     * @param header     displayed text
+     * @throws IOException throws on save
+     */
+    public void setHeader(String configName, String header) throws IOException {
+        this.configs.get(configName).options().header(header);
+        save(configName);
+    }
+
+    /**
+     * Saves specific config
+     *
+     * @param configName name of the config
+     * @throws IOException throws on save
+     */
+    public void save(String configName) throws IOException {
+        this.configs.get(configName).save();
     }
 }
