@@ -22,6 +22,7 @@ public class KelaniConfigManager {
 
     public KelaniConfigManager(File configFolder) {
         this.configFolder = configFolder;
+        configs = new HashMap<>();
     }
 
     public List<YamlConfiguration> createFile(String... name) throws IOException, InvalidConfigurationException {
