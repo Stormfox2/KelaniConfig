@@ -1,5 +1,6 @@
-package main.java;
+package de.kelanisystem.kelaniconfig;
 
+import org.simpleyaml.configuration.file.YamlConfiguration;
 import org.simpleyaml.configuration.file.YamlFile;
 import org.simpleyaml.exceptions.InvalidConfigurationException;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class KelaniConfigManager {
+        //PushTest
         private Map<String, YamlFile> configs;
         private File configFolder = new File("data/");
 
@@ -53,6 +55,10 @@ public class KelaniConfigManager {
                 configs.put(name, yamlFile);
             }
         }
+
+    public YamlConfiguration getConfig(String config) {
+        return configs.get(config);
+    }
 
         public void copyDefaults(String config, boolean bool) {
             this.configs.get(config).options().copyDefaults(bool);
