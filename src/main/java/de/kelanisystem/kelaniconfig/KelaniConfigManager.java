@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class KelaniConfigManager {
-    //PushTest
+    private final String separator = System.getProperty("file.separator");
+
     private Map<String, KelaniYamlFile> configs;
     private File configFolder = new File("data/");
 
@@ -59,14 +60,14 @@ public class KelaniConfigManager {
             if (!configFolder.mkdir()) throw new IOException("Could not create " + configFolder.getName());
 
         for (String name : names) {
-            KelaniYamlFile yamlFile = new KelaniYamlFile(new File(path + "/" + name + ".yml"));
+            KelaniYamlFile yamlFile = new KelaniYamlFile(new File(path + separator + name + ".yml"));
 
             if (!yamlFile.exists())
                 yamlFile.createNewFile(true);
 
             yamlFile.load();
 
-            yamlFile.setName(path + "/" + name + ".yml");
+            yamlFile.setName(name);
 
             System.out.println(yamlFile);
             System.out.println(yamlFile.exists());
