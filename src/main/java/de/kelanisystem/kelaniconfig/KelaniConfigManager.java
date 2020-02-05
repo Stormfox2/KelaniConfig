@@ -1,7 +1,5 @@
 package de.kelanisystem.kelaniconfig;
 
-import org.simpleyaml.configuration.file.YamlConfiguration;
-import org.simpleyaml.configuration.file.YamlFile;
 import org.simpleyaml.exceptions.InvalidConfigurationException;
 
 import java.io.File;
@@ -13,7 +11,7 @@ import java.util.Map;
 
 public class KelaniConfigManager {
     //PushTest
-    private Map<String, YamlFile> configs;
+    private Map<String, KelaniYamlFile> configs;
     private File configFolder = new File("data/");
 
     /**
@@ -42,7 +40,7 @@ public class KelaniConfigManager {
      * @throws IOException                   On save
      * @throws InvalidConfigurationException On load
      */
-    public List<YamlConfiguration> createFile(String... names) throws IOException, InvalidConfigurationException {
+    public List<KelaniYamlFile> createFile(String... names) throws IOException, InvalidConfigurationException {
         return createFile(configFolder, names);
     }
 
@@ -54,20 +52,22 @@ public class KelaniConfigManager {
      * @throws IOException                   On save
      * @throws InvalidConfigurationException On load
      */
-    public List<YamlConfiguration> createFile(File path, String... names) throws IOException, InvalidConfigurationException {
-        List<YamlConfiguration> configurations = new ArrayList<>();
+    public List<KelaniYamlFile> createFile(File path, String... names) throws IOException, InvalidConfigurationException {
+        List<KelaniYamlFile> configurations = new ArrayList<>();
 
         if (!path.exists())
             if (!configFolder.mkdir()) throw new IOException("Could not create " + configFolder.getName());
 
         for (String name : names) {
-            YamlFile yamlFile = new YamlFile(path + "/" + name + ".yml");
+            KelaniYamlFile yamlFile = new KelaniYamlFile(new File(path + "/" + name + ".yml"));
 
             if (!yamlFile.exists())
                 yamlFile.createNewFile(true);
 
             yamlFile.load();
 
+            System.out.println(yamlFile);
+            System.out.println(yamlFile.exists());
 
             configs.put(name, yamlFile);
             configurations.add(yamlFile);
@@ -82,7 +82,7 @@ public class KelaniConfigManager {
      * @param configName name of the config
      * @return YamlConfiguration file
      */
-    public YamlConfiguration getConfig(String configName) {
+    public KelaniYamlFile getConfig(String configName) {
         return configs.get(configName);
     }
 
