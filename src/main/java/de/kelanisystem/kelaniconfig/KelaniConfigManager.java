@@ -66,6 +66,8 @@ public class KelaniConfigManager {
 
             yamlFile.load();
 
+            yamlFile.setName(path + "/" + name + ".yml");
+
             System.out.println(yamlFile);
             System.out.println(yamlFile.exists());
 
