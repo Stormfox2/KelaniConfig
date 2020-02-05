@@ -69,9 +69,6 @@ public class KelaniConfigManager {
 
             yamlFile.setName(name);
 
-            System.out.println(yamlFile);
-            System.out.println(yamlFile.exists());
-
             configs.put(name, yamlFile);
             configurations.add(yamlFile);
         }
