@@ -57,7 +57,7 @@ public class KelaniConfigManager {
         List<KelaniYamlFile> configurations = new ArrayList<>();
 
         if (!path.exists())
-            if (!configFolder.mkdir()) throw new IOException("Could not create " + configFolder.getName());
+            if (!path.mkdir()) throw new IOException("Could not create " + path.getName());
 
         for (String name : names) {
             KelaniYamlFile yamlFile = new KelaniYamlFile(new File(path + separator + name + ".yml"), name);
