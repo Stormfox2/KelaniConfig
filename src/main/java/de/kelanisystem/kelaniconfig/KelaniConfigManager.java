@@ -149,7 +149,7 @@ public class KelaniConfigManager {
     }
 
     /**
-     * Gets an integer out of config
+     * Gets an integer out of config file
      *
      * @param configName name of config you want to read
      * @param key        key of the value you want to get
