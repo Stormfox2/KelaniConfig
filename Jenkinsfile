@@ -17,7 +17,7 @@ pipeline {
         stage('Code Review') {
             steps {
                 echo 'Reviewing code'
-                withSonarQubeEnv(credentialsId: 'de486a49-f681-4856-9c08-c4bb79a40599', installationName: 'SonarQube') { // You can override the credential to be used
+                withSonarQubeEnv(credentialsId: 'SonarQube', installationName: 'SonarQube') { // You can override the credential to be used
                     sh 'mvn sonar:sonar'
                 }
             }
