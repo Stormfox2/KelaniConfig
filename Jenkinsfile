@@ -106,7 +106,7 @@ pipeline {
                                 ]
                             );
                         } else {
-                            echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                            echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}, ${NEXUS_REPOSITORY_SNAPSHOT}, ${NEXUS_URL}, ${NEXUS_PROTOCOL}, ${NEXUS_VERSION}, ${NEXUS_CREDENTIAL_ID}, ${pom.artifactId}";
                             nexusArtifactUploader(
                                 nexusVersion: NEXUS_VERSION,
                                 protocol: NEXUS_PROTOCOL,
