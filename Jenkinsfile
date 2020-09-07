@@ -14,27 +14,27 @@ pipeline {
                 sh 'mvn clean'
             }
         }
-        stage('Code Review') {
-            steps {
-                echo 'Reviewing code'
-                withSonarQubeEnv(credentialsId: 'Sonar', installationName: 'SonarQube') { // You can override the credential to be used
-                    sh 'mvn sonar:sonar'
-                }
-            }
-        }
-        stage("Quality Gate"){
-            steps {
-                timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
         stage('Compile') {
             steps {
                 echo 'Compiling'
                 sh 'mvn compile'
             }
         }
+         stage('Code Review') {
+                    steps {
+                        echo 'Reviewing code'
+                        withSonarQubeEnv(credentialsId: 'Sonar', installationName: 'SonarQube') { // You can override the credential to be used
+                            sh 'mvn sonar:sonar'
+                        }
+                    }
+                }
+                stage("Quality Gate"){
+                    steps {
+                        timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+                            waitForQualityGate abortPipeline: true
+                        }
+                    }
+                }
         stage('Test') {
             steps {
                 echo 'Running tests'
