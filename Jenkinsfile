@@ -82,7 +82,7 @@ pipeline {
                     // Assign to a boolean response verifying If the artifact name exists
                     artifactExists = fileExists artifactPath;
                     if(artifactExists) {
-                        if(artifactPath.contains('SNAPSHOT') {
+                        if(artifactPath.contains('SNAPSHOT')) {
                             echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                             nexusArtifactUploader(
                                 nexusVersion: NEXUS_VERSION,
