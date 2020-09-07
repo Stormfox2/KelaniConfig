@@ -10,38 +10,41 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
+                echo 'Clearing workspace'
                 sh 'mvn clean'
             }
         }
         stage('Code Review') {
             steps {
+                echo 'Reviewing code'
                 withSonarQubeEnv(credentialsId: 'gitea', installationName: 'SonarQube') { // You can override the credential to be used
                     sh 'mvn sonar:sonar'
                 }
             }
         }
         stage("Quality Gate"){
+            steps {
                 timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-                    def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-                    if (qg.status != 'OK') {
-                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                    }
+                    waitForQualityGate abortPipeline: true
                 }
-
+            }
         }
         stage('Compile') {
             steps {
+                echo 'Compiling'
                 sh 'mvn compile'
             }
         }
         stage('Test') {
             steps {
+                echo 'Running tests'
                 sh 'mvn test'
                 junit testResults: './target/surefire-reports/*.xml', allowEmptyResults: true
             }
         }
         stage('Package') {
             steps {
+                echo 'Packaging'
                 sh 'mvn package'
             }
         }
