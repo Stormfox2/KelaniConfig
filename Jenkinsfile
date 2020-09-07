@@ -20,7 +20,7 @@ pipeline {
         // Repository where we will upload the snapshots
         NEXUS_REPOSITORY_SNAPSHOT = "KelaniSystemsSnapshots"
         // Jenkins credential id to authenticate to Nexus OSS
-        NEXUS_CREDENTIAL_ID = "gitea"
+        NEXUS_CREDENTIAL_ID = "SonarQube"
     }
     options {
         buildDiscarder logRotator(numToKeepStr: '10')
