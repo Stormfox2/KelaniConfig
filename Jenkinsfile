@@ -125,7 +125,7 @@ pipeline {
                                         file: "pom.xml",
                                         type: "pom"]
                                     ]
-                                }
+                                );
                             }
                         }
 
