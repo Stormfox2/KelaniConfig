@@ -17,7 +17,7 @@ pipeline {
         stage('Code Review') {
             steps {
                 echo 'Reviewing code'
-                withSonarQubeEnv(credentialsId: 'gitea', installationName: 'SonarQube') { // You can override the credential to be used
+                withSonarQubeEnv(credentialsId: 'SonarQube', installationName: 'SonarQube') { // You can override the credential to be used
                     sh 'mvn sonar:sonar'
                 }
             }
