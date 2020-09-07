@@ -1,1 +1,1 @@
-[![Build Status](https://jenkins.kelanisystem.de/job/KelaniConfig/badge/icon)](https://jenkins.kelanisystem.de/job/KelaniConfig/)
+[![Build Status](https://ci.ketarion.eu/job/KelaniConfig/job/master/badge/icon?style=plastic)](https://ci.ketarion.eu/job/KelaniConfig/job/master/)
