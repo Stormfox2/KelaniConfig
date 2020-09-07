@@ -1,5 +1,4 @@
 pipeline {
-    agent any
     tools {
         // This can be nexus3 or nexus2
         NEXUS_VERSION = "nexus3"
