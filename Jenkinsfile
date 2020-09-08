@@ -28,7 +28,7 @@ pipeline {
     stages {
         stage('Clean') {
             steps {
-                echo 'Clearing workspace'
+                echo 'Clearing workspace' //Test
                 sh 'mvn clean'
             }
         }
