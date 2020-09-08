@@ -57,6 +57,8 @@ public class KelaniYamlFile extends YamlFile {
     @Override
     public void addDefault(String key, Object value) {
         super.addDefault(key, value);
+
+        //Activate copy defaults
         options().copyDefaults(true);
     }
 
