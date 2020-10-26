@@ -4,6 +4,9 @@ import org.simpleyaml.exceptions.InvalidConfigurationException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +15,8 @@ import java.util.Map;
 public class KelaniConfigManager {
     private final String separator = System.getProperty("file.separator");
 
-    private Map<String, KelaniYamlFile> configs;
-    private File configFolder = new File("data/");
+    private final Map<String, KelaniYamlFile> configs;
+    private Path configFolder = Paths.get("data/");
 
     /**
      * Creates new instance of the KelaniConfigManager
@@ -28,7 +31,7 @@ public class KelaniConfigManager {
      *
      * @param configFolder default folder from configs
      */
-    public KelaniConfigManager(File configFolder) {
+    public KelaniConfigManager(Path configFolder) {
         this.configFolder = configFolder;
         configs = new HashMap<>();
     }
@@ -42,7 +45,7 @@ public class KelaniConfigManager {
      * @throws InvalidConfigurationException On load
      */
     public List<KelaniYamlFile> createFile(String... names) throws IOException, InvalidConfigurationException {
-        return createFile(configFolder, names);
+        return createFileWithOwnPath(configFolder, names);
     }
 
     /**
@@ -53,10 +56,26 @@ public class KelaniConfigManager {
      * @throws IOException                   On save
      * @throws InvalidConfigurationException On load
      */
-    public List<KelaniYamlFile> createFile(File path, String... names) throws IOException, InvalidConfigurationException {
+    public List<KelaniYamlFile> createFile(String path, String... names) throws IOException, InvalidConfigurationException {
         List<KelaniYamlFile> configurations = new ArrayList<>();
 
-        if (!path.exists() && !path.mkdir()) throw new IOException("Could not create " + path.getName());
+        Path newPath = Paths.get(configFolder.toString(), path);
+
+        return createFileWithOwnPath(newPath, names);
+    }
+
+    /**
+     * Creates config(s) with different path
+     *
+     * @param names of config(s) you want to create
+     * @return Configs you created
+     * @throws IOException                   On save
+     * @throws InvalidConfigurationException On load
+     */
+    public List<KelaniYamlFile> createFileWithOwnPath(Path path, String... names) throws IOException, InvalidConfigurationException {
+        List<KelaniYamlFile> configurations = new ArrayList<>();
+
+        if (!Files.exists(path)) Files.createDirectory(path);
 
         for (String name : names) {
             KelaniYamlFile yamlFile = new KelaniYamlFile(new File(path + separator + name + ".yml"), name);
@@ -67,6 +86,7 @@ public class KelaniConfigManager {
 
         return configurations;
     }
+
 
     /**
      * Returns configfile by name
