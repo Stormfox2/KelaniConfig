@@ -51,17 +51,17 @@ public class KelaniConfigManager {
     /**
      * Creates config(s) with different path
      *
-     * @param names of config(s) you want to create
+     * @param name of config(s) you want to create
      * @return Configs you created
      * @throws IOException                   On save
      * @throws InvalidConfigurationException On load
      */
-    public List<KelaniYamlFile> createFile(String path, String... names) throws IOException, InvalidConfigurationException {
+    public List<KelaniYamlFile> createFile(String path, String name) throws IOException, InvalidConfigurationException {
         List<KelaniYamlFile> configurations = new ArrayList<>();
 
         Path newPath = Paths.get(configFolder.toString(), path);
 
-        return createFileWithOwnPath(newPath, names);
+        return createFileWithOwnPath(newPath, name);
     }
 
     /**
